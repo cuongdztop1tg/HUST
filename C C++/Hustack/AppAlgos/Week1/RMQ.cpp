@@ -3,37 +3,37 @@
 using namespace std;
 
 const int inf = 1e9 + 7, maxN = 1e6 + 7;
-long int n, a[maxN], minVal[4 * maxN];
+long int n, a[maxN], TNode[4 * maxN];
 
 class segmentTree{
     public:
         void buildSegmentTree(int id, int l, int r){
             if(l == r){
-                minVal[id] = a[l];
+                TNode[id] = a[l];
                 return;
             }
             long int mid = (l + r) / 2;
             buildSegmentTree(id * 2, l, mid);
             buildSegmentTree(id * 2 + 1, mid + 1, r);
-            minVal[id] = min(minVal[id * 2], minVal[id * 2 + 1]);
+            TNode[id] = min(TNode[id * 2], TNode[id * 2 + 1]);
         }
 
         void update(int id, int l, int r, int i, int val){
             if(l > i || r < i) return;
             if(l == r){
-                minVal[id] = val;
+                TNode[id] = val;
                 return;
             }
             long int mid = (l + r) / 2;
             update(id * 2, l, mid, i, val);
             update(id * 2 + 1, mid + 1, r, i, val);
-            minVal[id] = min(minVal[id * 2], minVal[id * 2 + 1]);
+            TNode[id] = min(TNode[id * 2], TNode[id * 2 + 1]);
         }
 
         int query(int id, int l, int r, int u, int v){
             if(l > v || r < u) return inf;
             if(l >= u && r <= v){
-                return minVal[id];
+                return TNode[id];
             }
             long int mid = (l + r) / 2;
             long int leftChild = query(id * 2, l, mid, u, v);
