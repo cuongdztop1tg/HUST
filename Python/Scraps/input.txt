@@ -1,4 +1,4 @@
-“What Is Artificial Intelligence (AI)?
+What Is Artificial Intelligence (AI)?
 Artificial intelligence (AI) technology allows computers and machines to simulate human intelligence and problem-solving tasks. The ideal characteristic of artificial intelligence is its ability to rationalize and take action to achieve a specific goal. AI research began in the 1950s and was used in the 1960s by the United States Department of Defense when it trained computers to mimic human reasoning.
 SAS. "Artificial Intelligence."
 
@@ -35,4 +35,4 @@ Reactive AI is a type of Narrow AI that uses algorithms to optimize outputs base
 Many are concerned #with how artificial intelligence may affect human employment. With many industries looking to automate certain jobs with intelligent machinery, there is a concern that employees would be pushed out of the workforce. Self-driving cars may remove the need for taxis and car-share programs, while manufacturers may easily replace human labor with machines, making people's skills obsolete.
 
 In healthcare settings, AI is used to assist in diagnostics. AI can identify small anomalies in scans to better triangulate diagnoses from a patient's symptoms and vitals. AI can classify patients, maintain and track medical records, and deal with health insurance claims.
-Diversify your portfolio using indices. Imagine the possibilities with simulated funds. Join the Vantage Elite Challenge and trade major indices such as S&P 500, NASDAQ, and DJI through CFDs using up to $200,000 in simulated funds. Earn up to 80% of your trading profits upon successfully becoming a Vantage Elite Trader.*”
+Diversify your portfolio using indices. Imagine the possibilities with simulated funds. Join the Vantage Elite Challenge and trade major indices such as S&P 500, NASDAQ, and DJI through CFDs using up to $200,000 in simulated funds. Earn up to 80% of your trading profits upon successfully becoming a Vantage Elite Trader.*
