@@ -1,46 +1,40 @@
 #include <bits/stdc++.h>
+#include <vector>
 
 using namespace std;
 
-int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    int n, m;
-    cin >> n >> m;
-    int a[n + 1][m + 1] = {0};
-    long int Q;
-    for(int i = 1; i <= n; i++){
-        for(int j = 1; j <= m; j++){
-            cin >> a[i][j];
+void BFS(vector<vector<int>> &graph, int s, int size) {
+    queue<int> q;
+    vector<bool> visited(size, false);
+
+    visited[s] = true;
+    q.push(s);
+    cout << "BFS Traversal: " << s << " "; // Print the starting node
+
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
+        for (int i = 0; i < size; i++) {
+            if (graph[u][i] == 1 && !visited[i]) {
+                visited[i] = true;
+                q.push(i);
+                cout << i << " "; // Print the node when it's visited
+            }
         }
     }
     cout << endl;
-    long int prefixSum[n + 1][m + 1];
-    for(int i = 0; i <= n; i++){
-    	prefixSum[i][0] = 0;
-	}
-	for(int i = 0; i <= m; i++){
-    	prefixSum[0][i] = 0;
-	}
-    for(int i = 1; i <= n; i++){
-        for(int j = 1; j <= m; j++){
-            prefixSum[i][j] = prefixSum[i - 1][j] + prefixSum[i][j - 1] - prefixSum[i - 1][j - 1] + a[i][j];
+}
+
+int main() {
+    int size, s;
+    cin >> size;
+    vector<vector<int>> graph(size, vector<int>(size));
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            cin >> graph[i][j];
         }
     }
-	for(int i = 1; i <= n; i++){
-		for(int j = 1; j <= m; j++){
-			cout << prefixSum[i][j] << " ";
-		}
-		cout << endl;
-	}
-	cout << endl;
-	
-    cin >> Q;
-    for(int i = 0; i < Q; i++){
-        int r1, c1, r2, c2;
-        cin >> r1 >> c1 >> r2 >> c2;
-        cout << prefixSum[r2][c2] - prefixSum[r1 - 1][c2] - prefixSum[r2][c1 - 1] + prefixSum[r1 - 1][c1 - 1] << endl;
-    }
+    cin >> s;
+    BFS(graph, s, size);
     return 0;
 }
