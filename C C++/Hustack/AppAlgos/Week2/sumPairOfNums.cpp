@@ -2,7 +2,7 @@
 #include <algorithm>
 
 using namespace std;
-const int maxN = 1000001;
+const long int maxN = 1000001;
 long int n, M, a[maxN];
 int main(){
     ios_base::sync_with_stdio(false);

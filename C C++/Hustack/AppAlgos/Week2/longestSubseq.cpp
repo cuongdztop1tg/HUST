@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-const int maxN = 1000001;
+const long int maxN = 1000001;
 int a[maxN], n, Q;
 
 int main(){
