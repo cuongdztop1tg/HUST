@@ -2,7 +2,7 @@
 #include <vector>
 
 using namespace std;
-const int maxN = 1000;
+
 void BFS(vector<vector<int>>graph, int s, int size){
     queue<int> q;
     vector<bool> visited(size, false);
@@ -11,7 +11,7 @@ void BFS(vector<vector<int>>graph, int s, int size){
     q.push(s);
     while(!q.empty()){
         int u = q.front();
-        cout << u << " ";
+        cout << char(u + 97) << " ";
         q.pop();
         for(int i = 0; i < size; i++){
             if(graph[u][i] == 1 && !visited[i]){
