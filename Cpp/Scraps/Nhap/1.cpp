@@ -1,38 +1,38 @@
 #include <bits/stdc++.h>
 #include <algorithm>
-
 using namespace std;
 
 int main(){
-    long int n, value;
-    set<long int> a;
+    int n;
     cin >> n;
+    set<int> a;
     for(int i = 0; i < n; i++){
+        int value;
         cin >> value;
         a.insert(value);
     }
     string cmd;
     while(1){
         cin >> cmd;
+        int k;
         if(cmd == "#") break;
-        long int k;
-        if(cmd == "min_greater_or_equal"){
+        else if(cmd == "min_greater_equal"){
             cin >> k;
             auto it = a.lower_bound(k);
             if(it == a.end()) cout << "NULL" << endl;
             else cout << *it << endl;
         }
-        if(cmd == "min_greater"){
+        else if(cmd == "min_greater"){
             cin >> k;
             auto it = a.upper_bound(k);
             if(it == a.end()) cout << "NULL" << endl;
             else cout << *it << endl;
         }
-        if(cmd == "insert"){
+        else if(cmd == "insert"){
             cin >> k;
             a.insert(k);
         }
-        if(cmd == "remove"){
+        else if(cmd == "remove"){
             cin >> k;
             a.erase(k);
         }
