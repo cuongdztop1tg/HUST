@@ -1,12 +1,12 @@
 #include <bits/stdc++.h>
 #include <algorithm>
-#include <vector>
 
 using namespace std;
 
 int main(){
     long int n, value;
     set<long int> a;
+    cin >> n;
     for(int i = 0; i < n; i++){
         cin >> value;
         a.insert(value);
