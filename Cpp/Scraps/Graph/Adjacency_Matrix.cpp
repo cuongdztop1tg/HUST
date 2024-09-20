@@ -43,6 +43,9 @@ void DFS(vector<vector<int>> graph, int s, int size){
 }
 
 int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
     //a, b, c, d, e, f, g, h-> 0->7
     int size, s;
     cin >> size;
