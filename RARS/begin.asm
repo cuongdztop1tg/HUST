@@ -1,11 +1,9 @@
 .data
-	X:	.word 	1
-	Y:	.asciz	"Hello"
-	
+	X:	.word
+	Y:	.word
 .text
-	la	x1, X
-	addi	x1, zero, 1
+	addi	t1, zero, 5
+	addi	t2, zero, -1
 	
-	la	x2, Y
-	
-	
+	add	s0, t1, t1
+	add	s0, s0, t2
