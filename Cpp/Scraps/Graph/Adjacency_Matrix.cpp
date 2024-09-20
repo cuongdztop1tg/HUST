@@ -9,7 +9,7 @@ void BFS(vector<vector<int>> graph, int s, int size){
 
     visited[s] = true;
     queue.push(s);
-    
+
     while(!queue.empty()){
         int u = queue.front();
         cout << char(u + 97) << " ";
@@ -35,7 +35,7 @@ void DFS(vector<vector<int>> graph, int s, int size){
         cout << char(u + 97) << " ";
         stack.pop();
         for(int i = 0; i < size; i++){
-            if(graph[i][u] == 1 & !visited[i]){
+            if(graph[u][i] == 1 & !visited[i]){
                 visited[i] = true;
                 stack.push(i);
             }
