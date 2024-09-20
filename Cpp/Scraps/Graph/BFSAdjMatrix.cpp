@@ -15,7 +15,7 @@ void BFS(vector<vector<int>>graph, int s, int size){
         q.pop();
         for(int i = 0; i < size; i++){
             if(graph[u][i] == 1 && !visited[i]){
-                visited[i] == true;
+                visited[i] = true;
                 q.push(i);
             }
         }
