@@ -9,6 +9,7 @@ void BFS(vector<vector<int>> graph, int s, int size){
 
     visited[s] = true;
     queue.push(s);
+    
     while(!queue.empty()){
         int u = queue.front();
         cout << char(u + 97) << " ";
