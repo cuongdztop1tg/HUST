@@ -2,7 +2,20 @@
 #include <vector>
 using namespace std;
 
-void BFS(vector<vector<int>> graph, int s){
+void addEdgeUndirectedGraph(vector<vector<int>>& graph, int initial, int terminal){
+    if(initial >= graph.size()) graph.resize(initial + 1);
+    if(terminal >= graph.size()) graph.resize(terminal + 1);
+    graph[initial].push_back(terminal);
+    graph[terminal].push_back(initial);
+}
+
+void addEdgeDirectedGraph(vector<vector<int>>& graph, int initial, int terminal){
+    if(initial >= graph.size()) graph.resize(initial + 1);
+    if(terminal >= graph.size()) graph.resize(terminal + 1);
+    graph[initial].push_back(terminal);
+}
+
+void BFS(vector<vector<int>>& graph, int s){
     queue<int> queue;
     vector<bool> visited(graph.size(), false);
 
@@ -22,7 +35,7 @@ void BFS(vector<vector<int>> graph, int s){
     }
 }
 
-void DFS(vector<vector<int>> graph, int s){
+void DFS(vector<vector<int>>& graph, int s){
     stack<int> stack;
     vector<bool> visited(graph.size(), false);
 
@@ -43,5 +56,8 @@ void DFS(vector<vector<int>> graph, int s){
 }
 
 int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
     return 0;
 }

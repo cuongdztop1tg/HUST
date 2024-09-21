@@ -1,41 +1,69 @@
 #include <bits/stdc++.h>
-#include <algorithm>
+#include <vector>
 using namespace std;
 
+void addEdgeUndirectedGraph(vector<vector<int>>& graph, int initial, int terminal){
+    if(initial >= graph.size()) graph.resize(initial + 1);
+    if(terminal >= graph.size()) graph.resize(terminal + 1);
+    graph[initial].push_back(terminal);
+    graph[terminal].push_back(initial);
+}
+
+void addEdgeDirectedGraph(vector<vector<int>>& graph, int initial, int terminal){
+    if(initial >= graph.size()) graph.resize(initial + 1);
+    if(terminal >= graph.size()) graph.resize(terminal + 1);
+    graph[initial].push_back(terminal);
+}
+
+void BFS(vector<vector<int>>& graph, int s){
+    queue<int> queue;
+    vector<bool> visited(graph.size(), false);
+
+    visited[s] = true;
+    queue.push(s);
+
+    while(!queue.empty()){
+        int u = queue.front();
+        cout << char(u + 97) << " ";
+        queue.pop();
+        for(auto i : graph[u]){
+            if(!visited[i]){
+                visited[i] = true;
+                queue.push(i);
+            }
+        }
+    }
+}
+
+void DFS(vector<vector<int>>& graph, int s){
+    stack<int> stack;
+    vector<bool> visited(graph.size(), false);
+
+    visited[s] = true;
+    stack.push(s);
+
+    while(!stack.empty()){
+        int u = stack.top();
+        cout << char(u + 97) << " ";
+        stack.pop();
+        for(auto i : graph[u]){
+            if(!visited[i]){
+                visited[i] = true;
+                stack.push(i);
+            }
+        }
+    }
+}
+
 int main(){
-    int n;
-    cin >> n;
-    set<int> a;
-    for(int i = 0; i < n; i++){
-        int value;
-        cin >> value;
-        a.insert(value);
-    }
-    string cmd;
-    while(1){
-        cin >> cmd;
-        int k;
-        if(cmd == "#") break;
-        else if(cmd == "min_greater_equal"){
-            cin >> k;
-            auto it = a.lower_bound(k);
-            if(it == a.end()) cout << "NULL" << endl;
-            else cout << *it << endl;
-        }
-        else if(cmd == "min_greater"){
-            cin >> k;
-            auto it = a.upper_bound(k);
-            if(it == a.end()) cout << "NULL" << endl;
-            else cout << *it << endl;
-        }
-        else if(cmd == "insert"){
-            cin >> k;
-            a.insert(k);
-        }
-        else if(cmd == "remove"){
-            cin >> k;
-            a.erase(k);
-        }
-    }
+    vector<vector<int>> graph;
+    addEdgeUndirectedGraph(graph, 0, 1);
+    addEdgeUndirectedGraph(graph, 0, 4);
+    addEdgeUndirectedGraph(graph, 1, 2);
+    addEdgeUndirectedGraph(graph, 1, 3);
+    addEdgeUndirectedGraph(graph, 1, 4);
+    addEdgeUndirectedGraph(graph, 2, 3);
+    addEdgeUndirectedGraph(graph, 3, 4);
+    BFS(graph, 1);
     return 0;
 }

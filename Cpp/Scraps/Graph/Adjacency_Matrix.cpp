@@ -3,7 +3,16 @@
 
 using namespace std;
 
-void BFS(vector<vector<int>> graph, int s, int size){
+void addEdgeUndirectedGraph(vector<vector<int>>& graph, int initial, int terminal, int size){
+    graph[initial][terminal] = 1;
+    graph[terminal][initial] = 1;
+}
+
+void addEdgeDirectedGraph(vector<vector<int>>& graph, int initial, int terminal, int size){
+    graph[initial][terminal] = 1;
+}
+
+void BFS(vector<vector<int>>& graph, int s, int size){
     queue<int> queue;
     vector<bool> visited(size, false);
 
@@ -23,7 +32,7 @@ void BFS(vector<vector<int>> graph, int s, int size){
     }
 }
 
-void DFS(vector<vector<int>> graph, int s, int size){
+void DFS(vector<vector<int>>& graph, int s, int size){
     stack<int> stack;
     vector<bool> visited(size, false);
 
@@ -47,17 +56,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    //a, b, c, d, e, f, g, h-> 0->7
-    int size, s;
+    int size;
     cin >> size;
     vector<vector<int>> graph(size, vector<int> (size));
-    for(int i = 0; i < size; i++){
-        for(int j = 0; j < size; j++){
-            cin >> graph[i][j];
-        }
-    }
-    cin >> s;
-    BFS(graph, s, size);
-    DFS(graph, s, size);
     return 0;
 }
