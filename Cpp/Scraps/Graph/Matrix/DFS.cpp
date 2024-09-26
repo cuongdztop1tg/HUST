@@ -8,12 +8,14 @@ vector<bool> visited;
 vector<int> pred;
 vector<int> d;
 vector<int> f;
-int Time = 0;
+vector<int> id;
+int Time = 0, Count = 0;
 
 void DFS(int s){
     visited[s] = true;
     Time++;
     d[s] = Time;
+    id[s] = Count;
 
     cout << s << " ";
     for(int i = 0; i < V; i++){
@@ -32,6 +34,7 @@ int main(){
     visited.resize(V, false);
     d.resize(V);f.resize(V);
     pred.resize(V);
+    id.resize(V, 0);
 
     while(1){
         int initial, terminal;
@@ -49,13 +52,17 @@ int main(){
     
     for(int i = 0; i < V; i++){
         if(!visited[i]){
+            Count++;
             cout << "Source vertex " << i << ": ";
             DFS(i);
             cout << endl;
         }
     }
+    //Vertex classification
     for(int i = 0; i < V; i++){
         cout << "Vertex " << i << ": " << d[i] << " " << f[i] << endl;
     }
+    //count connected components
+    cout << "Number of connected components: " << Count << endl;
     return 0;
 }
