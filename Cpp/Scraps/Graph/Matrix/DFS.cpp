@@ -46,8 +46,16 @@ int main(){
         visited[i] = false;
         pred[i] = INT_MIN;
     }
-    DFS(0);
-    cout << endl;
-    cout << d[4] << " " << f[4];
+    
+    for(int i = 0; i < V; i++){
+        if(!visited[i]){
+            cout << "Source vertex " << i << ": ";
+            DFS(i);
+            cout << endl;
+        }
+    }
+    for(int i = 0; i < V; i++){
+        cout << "Vertex " << i << ": " << d[i] << " " << f[i] << endl;
+    }
     return 0;
 }
