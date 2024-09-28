@@ -64,5 +64,14 @@ int main(){
     }
     //count connected components
     cout << "Number of connected components: " << Count << endl;
+    for(int i = 1; i <= Count; i++){
+        cout << "Component " << i << ": "; 
+        for(int j = 0; j < V; j++){
+            if(id[j] == Count) cout << j << " ";
+        }
+        cout << endl;
+    }
+    //Pathfinding
+    
     return 0;
 }
