@@ -67,11 +67,11 @@ int main(){
     for(int i = 1; i <= Count; i++){
         cout << "Component " << i << ": "; 
         for(int j = 0; j < V; j++){
-            if(id[j] == Count) cout << j << " ";
+            if(id[j] == i) cout << j << " ";
         }
         cout << endl;
     }
     //Pathfinding
-    
+
     return 0;
 }
