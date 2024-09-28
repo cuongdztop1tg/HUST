@@ -9,6 +9,7 @@ vector<int> pred;
 vector<int> d;
 vector<int> f;
 vector<int> id;
+vector<int> path;
 int Time = 0, Count = 0;
 
 void DFS(int s){
@@ -20,8 +21,8 @@ void DFS(int s){
     cout << s << " ";
     for(int i = 0; i < V; i++){
         if(graph[s][i] == 1 && !visited[i]){
-            DFS(i);
             pred[i] = s;
+            DFS(i);
         }
     }
     Time++;
@@ -71,7 +72,9 @@ int main(){
         }
         cout << endl;
     }
-    //Pathfinding
-
+    //Pathfinding from s to t
+    int s, t;
+    cin >> s >> t;
+    
     return 0;
 }
