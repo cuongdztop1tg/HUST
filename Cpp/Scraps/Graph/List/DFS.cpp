@@ -14,7 +14,9 @@ void DFS(int s){
     d[s] = Time;
     id[s] = Count;
     for(auto i : graph[s]){
-        if(!visited[i]) DFS(i);
+        if(!visited[i]){
+            DFS(i);
+        }
     }
     Time++;
     f[s] = Time;
@@ -26,7 +28,7 @@ int main(){
     visited.resize(V, false);
     d.resize(V);
     f.resize(V);
-    pred.resize(V);
+    pred.resize(V, INT_MIN);
     id.resize(V);
     while(1){
         int initial, terminal;
@@ -58,5 +60,8 @@ int main(){
         }
         cout << endl;
     }
+
+    int s, t;
+    cin >> s >> t;
     return 0;
 }
