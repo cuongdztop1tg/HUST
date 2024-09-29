@@ -1,30 +1,20 @@
 #include <bits/stdc++.h>
-#include <vector>
+
 using namespace std;
 
-void addEdgeUndirectedGraph(vector<vector<int>>& graph, int initial, int terminal){
-    if(initial >= graph.size()) graph.resize(initial + 1);
-    if(terminal >= graph.size()) graph.resize(terminal + 1);
-    graph[initial].push_back(terminal);
-    graph[terminal].push_back(initial);
-}
+int V;
+vector<vector<int>> graph;
 
-void addEdgeDirectedGraph(vector<vector<int>>& graph, int initial, int terminal){
-    if(initial >= graph.size()) graph.resize(initial + 1);
-    if(terminal >= graph.size()) graph.resize(terminal + 1);
-    graph[initial].push_back(terminal);
-}
-
-void BFS(vector<vector<int>>& graph, int s){
+void BFS(int s){
     queue<int> queue;
-    vector<bool> visited(graph.size(), false);
+    vector<bool> visited(V, false);
 
     visited[s] = true;
     queue.push(s);
 
     while(!queue.empty()){
         int u = queue.front();
-        cout << char(u + 97) << " ";
+        cout << u << " ";
         queue.pop();
         for(auto i : graph[u]){
             if(!visited[i]){
@@ -33,31 +23,22 @@ void BFS(vector<vector<int>>& graph, int s){
             }
         }
     }
-}
-
-void DFS(vector<vector<int>>& graph, int s){
-    stack<int> stack;
-    vector<bool> visited(graph.size(), false);
-
-    visited[s] = true;
-    stack.push(s);
-
-    while(!stack.empty()){
-        int u = stack.top();
-        cout << char(u + 97) << " ";
-        stack.pop();
-        for(auto i : graph[u]){
-            if(!visited[i]){
-                visited[i] = true;
-                stack.push(i);
-            }
-        }
-    }
+    cout << endl;
 }
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    cin >> V;
+    graph.resize(V);
+    while(1){
+        int initial, terminal;
+        cin >> initial;
+        if(initial == -1) break;
+        cin >> terminal;
+        graph[initial].push_back(terminal);
+        //graph[terminal].push_back(initial);
+    }
+    int s;
+    cin >> s;
+    BFS(s);
     return 0;
 }
