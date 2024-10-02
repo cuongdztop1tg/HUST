@@ -2,68 +2,63 @@
 
 using namespace std;
 
-int n,k;
-int c[1000][1000];
-int visited[100000];
-int f=0;
-int fopt=99999;
-int load=0;
-int cmin=99999;
-int x[100000];
+int n, m, load = 0, opt = INT_MAX, minDistance = INT_MAX, cur = 0;
+int destination[1000], c[1000][1000];
+bool visited[1000];
 
-
-int check(int v){
-    if (visited[v]==1) return 0;
-    if (v>n){
-        if (visited[v-n]==0) return 0;
+bool check(int i){
+    if(visited[i]) return false;
+    if(i > n){
+        if(!visited[i - n]) return false;
     }
     else{
-        if (load+1>k) return 0;
+        if(load + 1 > m) return false;
     }
-    return 1;
+    return true;
 }
 
 void updateBest(){
-    if (f+c[x[2*n]][x[0]]<fopt){
-        fopt = f+c[x[2*n]][x[0]];
-    }
+    int total = cur + c[destination[2 * n]][destination[0]];
+    if(total < opt) opt = total;
 }
-void Try(int k){
-    for (int i=1;i<=2*n;i++){
-        if (check(i)==1){
-            if (i<=n) load++;
+
+void BUS(int k){
+    for(int i = 1; i <= 2 * n; i++){
+        if(check(i)){
+            if(i <= n) load++;
             else load--;
-            x[k]=i;
-            visited[i]=1;
-            f+=c[x[k-1]][x[k]];
-            if (k==2*n) updateBest();
+
+            destination[k] = i;
+            visited[i] = true;
+            cur += c[destination[k - 1]][destination[k]];
+
+            if(k == 2 * n) updateBest();
             else{
-                if (f+cmin*(2*n+1-k)<fopt) Try(k+1);
+                if(cur + (2 * n - k + 1)*minDistance < opt) BUS(k + 1);
             }
-            if (i<=n) load--;
+
+            if(i <= n) load--;
             else load++;
-            f-=c[x[k-1]][x[k]];
-            visited[i]=0;
+            visited[i] = false;
+            cur -= c[destination[k - 1]][destination[k]];
         }
     }
 }
 
 void input(){
-    cin>>n>>k;
-    for (int i=0;i<=2*n;i++)
-        for (int j=0;j<=2*n;j++) {
-            cin>>c[i][j];
-            if (i != j && c[i][j] < cmin) 
-                cmin = c[i][j];
+    cin >> n >> m;
+    for(int i = 0; i <= 2 * n; i++){
+        for(int j = 0; j <= 2 * n; j++){
+            cin >> c[i][j];
+            if(i != j && c[i][j] < minDistance) minDistance = c[i][j];
         }
+    }
+    destination[0] = 0;
 }
+
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
     input();
-    x[0]=0;
-    visited[0]=1;
-    Try(1);
-    cout<<fopt;
+    BUS(1);
+    cout << opt;
+    return 0;
 }
