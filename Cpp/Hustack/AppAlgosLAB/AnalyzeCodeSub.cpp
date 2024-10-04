@@ -2,40 +2,46 @@
 
 using namespace std;
 
-int totalSub = 0, totalERR = 0;
-map<string, int> userERRCount;
-map<string, int> totalUserPoints;
-set<int, int> subTime;
-
-int convertTime(string time){
-    int convert = 3600*((time[0] - '0')*10 + (time[1] - '0')) + 60*((time[3] - '0')*10 + (time[4] - '0'))
-                    + (time[6] - '0')*10 + (time[7] - '0');
-    return convert;
+int convert(string Time){
+    return 3600*((Time[0] - '0')*10 + (Time[1] - '0')) + 60*((Time[3] - '0')*10 + (Time[4] - '0'))
+           + (Time[6] - '0')*10 + (Time[7] - '0');
 }
 
 int main(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
     string type;
-    do{
-        cin >> type;
-        if(type == "#") continue;
-
-        string user, problem, time, status;
+    int totalSub = 0, totalERR = 0;
+    map<string, int> totalERRofUser;
+    map<string, int> userTotalPoint;
+    map<pair<string, string>, int> userMaxPointOfProblem;
+    vector<int> totalSubAtTime;
+    while(1){
+        string userID, problemID, Time, status;
         int point;
-        cin >> user >> problem >> time >> status;
-        cin >> point;
-        totalSub++;
+        cin >> userID;
+        if(userID == "#") break;
+        cin >> problemID >> Time >> status >> point;
+        ++totalSub;
         if(status == "ERR"){
-            totalERR++;
-            userERRCount[user]++;
+            ++totalERR;
+            totalERRofUser[userID]++;
         }
-        totalUserPoints[user] += point;
-        
-
-    } while(type != "#");
-
-    do{
+        else{
+            if(userMaxPointOfProblem[{userID, problemID}] < point){
+                userTotalPoint[userID] -= userMaxPointOfProblem[{userID, problemID}];
+                userMaxPointOfProblem[{userID, problemID}] = point;
+                userTotalPoint[userID] += userMaxPointOfProblem[{userID, problemID}];
+            }
+        }
+        totalSubAtTime.push_back(convert(Time));
+    }
+    sort(totalSubAtTime.begin(), totalSubAtTime.end());
+    while(1){
         cin >> type;
-        if(type == "#") continue;
+        if(type == "#") break;
 
         if(type == "?total_number_submissions"){
             cout << totalSub << endl;
@@ -44,19 +50,24 @@ int main(){
             cout << totalERR << endl;
         }
         else if(type == "?number_error_submision_of_user"){
-            string user;
-            cin >> user;
-            cout << userERRCount[user] << endl;
+            string userID;
+            cin >> userID;
+            cout << totalERRofUser[userID] << endl;
         }
         else if(type == "?total_point_of_user"){
-            string user;
-            cin >> user;
-            cout << totalUserPoints[user] << endl;
+            string userID;
+            cin >> userID;
+            cout << userTotalPoint[userID] << endl;
         }
         else if(type == "?number_submission_period"){
-            
+            string stime, etime;
+            int Count = 0;
+            cin >> stime >> etime;
+            auto start = lower_bound(totalSubAtTime.begin(), totalSubAtTime.end(), convert(stime));
+            auto end = upper_bound(totalSubAtTime.begin(), totalSubAtTime.end(), convert(etime));
+            cout << end - start << endl;
         }
-
-    } while(type != "#");
+    }
+    //for(int i = 0; i < totalSubAtTime.size(); i++) cout << totalSubAtTime[i] << " ";
     return 0;
 }

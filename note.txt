@@ -1,0 +1,28 @@
+Analyze code submission
+
+Data:
+    <UserID> <ProblemID> <Time> <Status> <Point>
+-> format as a menu
+-> Data types: + UserID, ProblemID, Time, Status: string
+               + Point: int ?
+-> Point gain in a ProblemID = max(points of all submissions)
+-> Update user point after each time encounter an "OK"
+
+Query:
+-?total_number_submissions: DONE
+    +create a variable "totalSub" with initial value 0
+    +increment after each input
+    +print
+-?number_err_submission: DONE
+    +create a variable "totalERR" with initial value 0
+    +increment after each time the input is "ERR"
+    +print
+-?number_error_submission_of_user: DONE
+    +cin >> userID
+    +using a map: key->userID, value->number_error_submission_of_user
+    +increment the value of <userID> when encounter "ERR"
+    +print
+-?total_points_of_user: DONE
+    +cin >> userID
+    +map: key->userID, value->total_number_submissions
+    +
