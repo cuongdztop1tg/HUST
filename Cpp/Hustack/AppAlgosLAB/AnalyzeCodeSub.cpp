@@ -5,7 +5,7 @@ using namespace std;
 int totalSub = 0, totalERR = 0;
 map<string, int> userERRCount;
 map<string, int> totalUserPoints;
-map<string, int> userSubTime;
+set<int, int> subTime;
 
 int convertTime(string time){
     int convert = 3600*((time[0] - '0')*10 + (time[1] - '0')) + 60*((time[3] - '0')*10 + (time[4] - '0'))
@@ -21,14 +21,15 @@ int main(){
 
         string user, problem, time, status;
         int point;
-        cin >> user >> problem >> time >> status >> point;
+        cin >> user >> problem >> time >> status;
+        cin >> point;
         totalSub++;
         if(status == "ERR"){
             totalERR++;
             userERRCount[user]++;
         }
         totalUserPoints[user] += point;
-        userSubTime[user] = convertTime(time);
+        
 
     } while(type != "#");
 
@@ -53,15 +54,7 @@ int main(){
             cout << totalUserPoints[user] << endl;
         }
         else if(type == "?number_submission_period"){
-            int Count = 0;
-            string ftime, etime;
-            cin >> ftime >> etime;
-            int start = convertTime(ftime);
-            int end = convertTime(etime);
-            for(auto it = userSubTime.begin(); it != userSubTime.end(); it++){
-                if(it->second >= start && it->second <= end) Count++;
-            }
-            cout << Count << endl;
+            
         }
 
     } while(type != "#");
