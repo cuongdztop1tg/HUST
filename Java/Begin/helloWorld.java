@@ -1,10 +1,10 @@
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class helloWorld{
     public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        String log = sc.nextLine();
-        System.out.println(log);
-        sc.close();
+        String log = JOptionPane.showInputDialog("Input: ");
+        JOptionPane.showMessageDialog(null, "Hello " + log + "!");
+        System.exit(0);
     }
 }
