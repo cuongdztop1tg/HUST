@@ -4,8 +4,8 @@ import java.util.Vector;
 public class vector{
     public void set(Vector<Double> v, double x, double y, double z){
         v.add(0, x);
-        v.add(0, y);
-        v.add(0, z);
+        v.add(1, y);
+        v.add(2, z);
     }
     public Vector<Double> sumTwoVector(Vector<Double> v1, Vector<Double> v2){
         Vector<Double> res = new Vector<>(3);
@@ -28,6 +28,6 @@ public class vector{
         return res;
     }
     public void print(Vector<Double> v){
-        for(int i = 0; i < v.size(); i++) System.out.print(v.get(i) + ' ');
+        for(double it : v) System.out.print(it + " ");
     }
 } 
