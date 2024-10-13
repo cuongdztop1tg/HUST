@@ -1,4 +1,4 @@
-package Java.PracticeWithPackage.SquareCircle;
+package JavaPractice.PracticeWithPackage.SquareCircle;
 
 public class Square {
     private double side;
