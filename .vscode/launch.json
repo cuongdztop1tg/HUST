@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "randomShit",
+            "request": "launch",
+            "mainClass": "randomShit",
+            "projectName": "Coding_ae5ae644"
+        },
+        {
+            "type": "java",
             "name": "helloWorld",
             "request": "launch",
             "mainClass": "helloWorld",

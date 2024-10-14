@@ -8,17 +8,28 @@ public class randomShit{
         Scanner sc = new Scanner(System.in);
         staff st = new staff();
         String name;
-        double baseSalary, salaryCoef, maxSalary, salary;
+        double baseSalary, salaryCoef, maxSalary;
         System.out.println("Enter staff infor: ");
         System.out.print("Name: ");
         name = sc.nextLine();
-        System.out.println("Base salary: ");
+        System.out.print("Base salary: ");
         baseSalary = sc.nextDouble();
-        System.out.println("Salary coefficient: ");
+        System.out.print("Salary coefficient: ");
         salaryCoef = sc.nextDouble();
-        System.out.println("Max salary: ");
+        System.out.print("Max salary: ");
         maxSalary = sc.nextDouble();
-        st.getStaffInfor(name, baseSalary, salaryCoef, maxSalary);
+        st.setStaffInfor(name, baseSalary, salaryCoef, maxSalary);
+        st.calculateSalary();
+        st.getStaffInfor();
+        System.out.print("Increase Salary Coefficient By: ");
+        double increaseSalaryCoefBy = sc.nextDouble();
+        if(st.increaseSalary(increaseSalaryCoefBy)){
+            System.out.println("New staff information: ");
+            st.getStaffInfor();
+        }
+        else{
+            System.out.println("New salary exceed max salary, can not increase");
+        }
         sc.close();
     }
 }
