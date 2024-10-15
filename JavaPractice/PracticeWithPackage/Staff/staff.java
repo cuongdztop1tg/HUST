@@ -3,7 +3,7 @@ package JavaPractice.PracticeWithPackage.Staff;
 public class staff {
     private String name;
     private double baseSalary, salaryCoef, maxSalary, salary;
-    public void setStaffInfor(String name, double baseSalary, double salaryCoef, double maxSalary){
+    public staff(String name, double baseSalary, double salaryCoef, double maxSalary){
         this.name = name;
         this.baseSalary = baseSalary;
         this.salaryCoef = salaryCoef;

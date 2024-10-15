@@ -6,7 +6,6 @@ import JavaPractice.PracticeWithPackage.Staff.*;
 public class randomShit{
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        staff st = new staff();
         String name;
         double baseSalary, salaryCoef, maxSalary;
         System.out.println("Enter staff infor: ");
@@ -18,7 +17,7 @@ public class randomShit{
         salaryCoef = sc.nextDouble();
         System.out.print("Max salary: ");
         maxSalary = sc.nextDouble();
-        st.setStaffInfor(name, baseSalary, salaryCoef, maxSalary);
+        staff st = new staff(name, baseSalary, salaryCoef, maxSalary);
         st.calculateSalary();
         st.getStaffInfor();
         System.out.print("Increase Salary Coefficient By: ");
