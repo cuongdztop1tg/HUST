@@ -9,21 +9,24 @@ bool comp(int &a, int &b){
     return a > b;
 }
 
+bool exchange(){
+    for(int i = 0; i < d.size(); i++){
+        if(X - d[i] >= 0){
+            X -= d[i];
+            return true;
+        }
+    }
+    return false;
+}
+
 void solve(){
     sort(d.begin(), d.end(), comp);
-    int cur = X;
     while(X > 0){
-        for(int i = 0; i < d.size(); i++){
-            if(cur - d[i] >= 0){
-                cur -= d[i];
-                Count++;
-            }
-        }
-        if(X == cur){
+        if(exchange()) Count++;
+        else{
             cout << -1;
             return;
         }
-        else X = cur;
     }
     cout << Count;
 }
