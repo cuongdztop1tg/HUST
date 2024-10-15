@@ -7,7 +7,7 @@ vector<pair<int, int>> graph[1000];
 int d[1000], found[1000], p[1000];
 
 
-void Dijkstra(){
+void Dickstra(){
     for(int i = 0; i <= V; i++){
         d[i] = INT_MAX;
         found[i] = false;
@@ -42,7 +42,7 @@ int main(){
         graph[x].push_back({y,w});
     }
     cin >> s;
-    Dijkstra();
+    Dickstra();
 
     for (int i = 1; i <= V; i++) {
         if (d[i] == INT_MAX) {
