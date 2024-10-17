@@ -14,6 +14,9 @@ public class user {
     public String getUsername(){
         return this.name;
     }
+    public String getPassword(){
+        return this.password;
+    }
     public static user regiserEmail(String username, String password, String emailAddress){
         return new user(username, password, emailAddress);
     }

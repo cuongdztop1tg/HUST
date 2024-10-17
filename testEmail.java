@@ -43,6 +43,9 @@ public class testEmail {
         public String getUsername(){
             return this.name;
         }
+        public String getPassword(){
+            return this.password;
+        }
         public static user registerEmail(String username, String password, String emailAddress){
             user user =  new user(username, password, emailAddress);
             return user;
