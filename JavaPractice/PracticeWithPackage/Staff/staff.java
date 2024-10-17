@@ -3,11 +3,13 @@ package JavaPractice.PracticeWithPackage.Staff;
 public class staff {
     private String name;
     private double baseSalary, salaryCoef, maxSalary, salary;
+    private static int count;
     public staff(String name, double baseSalary, double salaryCoef, double maxSalary){
         this.name = name;
         this.baseSalary = baseSalary;
         this.salaryCoef = salaryCoef;
         this.maxSalary = maxSalary;
+        count++;
     }
     public void getStaffInfor(){
         //System.out.println("Staff information: ");
@@ -28,5 +30,8 @@ public class staff {
             this.salary = newSalary;
             return true;
         }
+    }
+    public static int countStaff(){
+        return count;
     }
 }

@@ -8,17 +8,24 @@ public class randomShit{
         Scanner sc = new Scanner(System.in);
         String name;
         double baseSalary, salaryCoef, maxSalary;
-        System.out.println("Enter staff infor: ");
-        System.out.print("Name: ");
-        name = sc.nextLine();
-        System.out.print("Base salary: ");
-        baseSalary = sc.nextDouble();
-        System.out.print("Salary coefficient: ");
-        salaryCoef = sc.nextDouble();
-        System.out.print("Max salary: ");
-        maxSalary = sc.nextDouble();
-        staff st = new staff(name, baseSalary, salaryCoef, maxSalary);
-        st.calculateSalary();
+        System.out.print("Enter number of staff: ");
+        int n = sc.nextInt();
+        staff[] list = new staff[n];
+        for(int i = 0; i < n; i++){
+            System.out.println("Enter staff infor: ");
+            System.out.print("Name: ");
+            name = sc.nextLine();
+            System.out.print("Base salary: ");
+            baseSalary = sc.nextDouble();
+            System.out.print("Salary coefficient: ");
+            salaryCoef = sc.nextDouble();
+            System.out.print("Max salary: ");
+            maxSalary = sc.nextDouble();
+            list[i] = new staff(name, baseSalary, salaryCoef, maxSalary);
+            list[i].calculateSalary();
+            System.out.println(staff.countStaff());
+        }
+        /*
         st.getStaffInfor();
         System.out.print("Increase Salary Coefficient By: ");
         double increaseSalaryCoefBy = sc.nextDouble();
@@ -29,6 +36,7 @@ public class randomShit{
         else{
             System.out.println("New salary exceed max salary, can not increase");
         }
+        */
         sc.close();
     }
 }
