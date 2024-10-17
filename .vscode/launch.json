@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "manageStaff",
+            "request": "launch",
+            "mainClass": "JavaPractice.PracticeWithPackage.Staff.manageStaff",
+            "projectName": "Coding_ae5ae644"
+        },
+        {
+            "type": "java",
+            "name": "staff",
+            "request": "launch",
+            "mainClass": "JavaPractice.PracticeWithPackage.Staff.staff",
+            "projectName": "Coding_ae5ae644"
+        },
+        {
+            "type": "java",
             "name": "randomShit",
             "request": "launch",
             "mainClass": "randomShit",
