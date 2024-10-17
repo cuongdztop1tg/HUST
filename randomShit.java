@@ -12,9 +12,9 @@ public class randomShit{
         int n = sc.nextInt();
         staff[] list = new staff[n];
         for(int i = 0; i < n; i++){
-            System.out.println("Enter staff infor: ");
+            System.out.println("Enter staff " + (i + 1) + " infor: ");
             System.out.print("Name: ");
-            name = sc.nextLine();
+            name = sc.next();
             System.out.print("Base salary: ");
             baseSalary = sc.nextDouble();
             System.out.print("Salary coefficient: ");
@@ -25,6 +25,7 @@ public class randomShit{
             list[i].calculateSalary();
             System.out.println(staff.countStaff());
         }
+        
         /*
         st.getStaffInfor();
         System.out.print("Increase Salary Coefficient By: ");

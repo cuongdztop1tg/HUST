@@ -34,4 +34,11 @@ public class staff {
     public static int countStaff(){
         return count;
     }
+    public double totalSalary(staff...st){
+        double total = 0.0;
+        for(staff i : st){
+            total += i.salary;
+        }
+        return total;
+    }
 }
