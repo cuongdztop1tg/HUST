@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int X[100000];
+int X[1000];
 int n;
 int ans = 0;
 
