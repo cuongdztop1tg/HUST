@@ -90,7 +90,7 @@ void findShortestPath(){
         q.pop();
 
         if(cur.row == desRow && cur.col == desCol){
-            int countSpace = 0;
+            int countSpace = 0; 
             for(int i = 0; i < cur.path.length(); i++){
                 if(cur.path[i] == ' ') countSpace++;
             }
