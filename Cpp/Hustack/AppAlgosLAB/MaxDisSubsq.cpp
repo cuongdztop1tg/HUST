@@ -6,7 +6,7 @@ const int N = 1e6 + 6;
 int t, n, c, a[N];
 
 bool check(int D){
-    int s1 = 1;
+    int s1 = 0;
     int i = 1, j = 2;
     while(i < n){
         while(j <= n && a[j] - a[i] < D) j++;
