@@ -6,7 +6,7 @@ const int N = 1e6 + 6;
 int t, n, c, a[N];
 
 bool check(int D){
-    int s1 = 0;
+    int s1 = 1;
     int i = 1, j = 2;
     while(i < n){
         while(j <= n && a[j] - a[i] < D) j++;
@@ -23,10 +23,11 @@ int solve(){
     while(l <= r){
         int D = (l + r) / 2;
         if(check(D)) l = D + 1;
-        else r = D;
+        else r = D - 1;  // Corrected this line
     }
     return r;
 }
+
 int main(){
     cin >> t;
     while(t--){
