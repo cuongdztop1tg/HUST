@@ -36,15 +36,15 @@ input_loop:
 	slt	t2, t0, s0	#check loop condition i < size
 	beq	t2, zero, end_input_loop	#end loop if i >= size
 	
-	#read name and store to s1
+	#read name and store in s1
 	li	a7, 8
 	add	a0, s1, zero
 	li	a1, 32
 	ecall
 	addi	s1, s1, 32	#move to next element
 	
-	#read mark
-	li	a7, 7
+	#read mark and store in s2
+	li	a7, 5
 	ecall
 	sw	a0, 0(s2)	#store input mark in s2
 	addi	s2, s2, 4	#move to next element
@@ -74,7 +74,7 @@ print_loop:
 	addi	s1, s1, 32	#move to next element
 
 	#print mark
-	li	a7, 3
+	li	a7, 1
 	lw	a0, 0(s2)
 	ecall
 	addi	s2, s2, 4	#move to next element
