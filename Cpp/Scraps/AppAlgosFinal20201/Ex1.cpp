@@ -7,8 +7,8 @@ int main(){
     cin >> T;
     while(T--){
         int n, m, count = 0;
-        unordered_set<long, int> a;
-        unordered_set<long, int> b;
+        unordered_set<long> a;
+        unordered_set<long> b;
         cin >> n;
         long x;
         while(n--){
@@ -16,7 +16,7 @@ int main(){
             a.insert(x);
         }
         cin >> m;
-        while(n--){
+        while(m--){
             cin >> x;
             b.insert(x);
         }
