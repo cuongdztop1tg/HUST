@@ -13,11 +13,12 @@ int main(){
         long a[N], dp[N];
         for(int i = 1; i <= n; i++){
             cin >> a[i];
-            dp[a[i]] = 0;
+            dp[i] = 1;
         }
-        int maxLIS = 0;
         for(int i = 1; i <= n; i++){
-            dp[a[i]] = 1 + dp[a[i] - 1];
+            for(int j = 1; j < i; j++){
+                if(a[i] > a[j] + 1) dp[i] = max(dp[i], 1 + dp[j]);
+            }
         }
         cout << *max_element(dp + 1, dp + n + 1) << endl;
     }
