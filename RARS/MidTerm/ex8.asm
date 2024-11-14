@@ -3,7 +3,7 @@
 				#max name length = 32
 	marks:	.space 400	#array to store students' marks
 
-	message1	:	.asciz "Enter number of students: "
+	message1:	.asciz "Enter number of students: "
 	message2:	.asciz "Enter list of students: "
 .text
 #Workflow
@@ -44,9 +44,9 @@ input_loop:
 	addi	s1, s1, 32	#move to next element
 	
 	#read mark and store in s2
-	li	a7, 5
+	li	a7, 6
 	ecall
-	sw	a0, 0(s2)	#store input mark in s2
+	fsw	fa0, 0(s2)	#store input mark in s2
 	addi	s2, s2, 4	#move to next element
 	
 	addi	t0, t0, 1	#i = i + 1
@@ -74,8 +74,8 @@ print_loop:
 	addi	s1, s1, 32	#move to next element
 
 	#print mark
-	li	a7, 1
-	lw	a0, 0(s2)
+	li	a7, 2
+	flw	fa0, 0(s2)
 	ecall
 	addi	s2, s2, 4	#move to next element
 	
