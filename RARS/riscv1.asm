@@ -4,10 +4,9 @@
 
 	message1:	.asciz "Enter number of students: "
 	message2:	.asciz "Enter list of students: "
-	message3:	.asciz "Students list: "
 .text
 
-# Input: Enter the number of students and read each student's name and mark
+# Input function: Enter the number of students and read each student's name and mark
 input:
 	# Display prompt: "Enter number of students"
 	li	a7, 4
@@ -35,7 +34,7 @@ input_loop:
 
 	# Read name and store in names array
 	li	a7, 8			# syscall for reading a string
-	add	a0, s1, zero		# set a0 to current name position
+	add	a0, s1, zero	# set a0 to current name position
 	li	a1, 32			# max length of name
 	ecall
 	addi	s1, s1, 32		# move to next name slot
@@ -50,7 +49,7 @@ input_loop:
 	j	input_loop
 end_input_loop:
 
-# Sorting: Sort students based on their marks in descending order using Bubble Sort
+# Sorting function: Sort students based on their marks in descending order using Bubble Sort
 sort:
 	li	t0, 0			# outer loop index i = 0
 	addi	s4, s0, -1		# upper bound for outer loop (size - 1)
@@ -115,16 +114,11 @@ end_inner_loop:
 
 end_outer_loop:
 
-# Print: Print list of students after sorting
+# Print function: Print list of students after sorting
 print:
 	li	t0, 0			# index i = 0
 	la	s1, names		# pointer to names array
 	la	s2, marks		# pointer to marks array
-	
-	# Display prompt: "Student list: "
-	li	a7, 4
-	la	a0, message3
-	ecall
 
 print_loop:
 	slt	t2, t0, s0		# check if i < number of students
@@ -132,7 +126,7 @@ print_loop:
 
 	# Print name
 	li	a7, 4			# syscall for printing string
-	add	a0, s1, zero		# set a0 to current name position
+	add	a0, s1, zero	# set a0 to current name position
 	ecall
 	addi	s1, s1, 32		# move to next name slot
 
