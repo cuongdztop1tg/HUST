@@ -3,6 +3,7 @@
 char names[100][32];
 float marks[100];
 char message1[] = "Enter number of students: ";
+char error_msg[] = "Size should be a positive integer, please input again!";
 char message2[] = "Enter list of students: ";
 char message3[] = "List of students: ";
 
@@ -10,7 +11,10 @@ int main() {
     int size;
     printf("%s", message1);
     scanf("%d", &size);
-    
+    while(size < 0){
+        printf("%s\n%s", error_msg, message1);
+        scanf("%d", &size);
+    }
     printf("%s\n", message2);
     for (int i = 0; i < size; i++) {
         scanf("%s", names[i]);
