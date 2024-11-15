@@ -2,6 +2,7 @@
 
 int X[1000];
 char message1[] = "Enter array size: ";
+char error_msg[] = "Size should be a positive integer, please input again!";
 char message2[] = "Enter array: ";
 char message3[] = "Max element of the array: ";
 char message4[] = "Enter m: ";
@@ -12,6 +13,10 @@ int main(){
     int size;
     printf("%s", message1);
     scanf("%d", &size);
+    while(size < 0){
+        printf("%s\n%s", error_msg, message1);
+        scanf("%d", &size);
+    }
     printf("%s", message2);
     for(int i = 0; i < size; i++){
         scanf("%d", &X[i]);

@@ -1,6 +1,7 @@
 .data 
 	X:	.space 4000	#array to store the elements
 	message1:	.asciz "Enter array size: "
+	error_msg:	.asciz "Size should be a positive integer, please input again!\n"
 	message2:	.asciz "Enter array: "
 	message3:	.asciz "Max element of the array: "
 	message4:	.asciz "Enter m: "
@@ -15,7 +16,13 @@
 #--------------------------------------------------------------
 
 #Input the size of array and the elements of the array
+#--------------------------------------------------------------
+#Enter the size of the array
+#Iterate through the array n time, input the element in the array
+#--------------------------------------------------------------
 input:
+#input the size of both array, if the input is not correct, tell the user to input again
+input_size:
 	#Enter array size
 	li	a7, 4
 	la	a0, message1
@@ -25,14 +32,24 @@ input:
 	ecall
 	
 	add	s0, a0, zero
-	#print message2
+	bge 	s0, zero, valid_input    # If s0 >= 0, jump to valid_input
+    	j invalid_input            # If s0 < 0, go to invalid_input
+
+invalid_input:
+        # Print "Invalid input" error message
+        li a7, 4                   # Syscall for printing a string
+        la a0, error_msg           # Load address of error message
+        ecall                      # Print the error message
+        j input_size               # Go back to input prompt
+valid_input:	     
+        #print message2
 	li	a7, 4
 	la	a0, message2
 	ecall
 	#Initialize array pointer and index
 	li	t0, 0			#t0 is the index i of the array X, t0 = i = 0
 	la	s1, X			#set address of X to s1
-
+	
 	#loop to input the array
 input_loop:
 	slt	t2, t0, s0		#check loop condition i < size

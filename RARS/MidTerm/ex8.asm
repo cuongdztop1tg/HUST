@@ -3,12 +3,15 @@
 	marks:	.space 400	# array to store students' marks
 
 	message1:	.asciz "Enter number of students: "
+	error_msg:	.asciz "Size should be a positive integer, please input again!\n"
 	message2:	.asciz "Enter list of students: "
 	message3:	.asciz "Students list: "
 .text
 
 # Input: Enter the number of students and read each student's name and mark
 input:
+#input the size of both array, if the input is not correct, tell the user to input again
+input_size:
 	# Display prompt: "Enter number of students"
 	li	a7, 4
 	la	a0, message1
@@ -18,10 +21,24 @@ input:
 	li	a7, 5
 	ecall
 	add	s0, a0, zero		# s0 = number of students
+	bge 	s0, zero, valid_input    # If s0 >= 0, jump to valid_input
+    	j invalid_input            # If s0 < 0, go to invalid_input
 
+invalid_input:
+        # Print "Invalid input" error message
+        li a7, 4                   # Syscall for printing a string
+        la a0, error_msg           # Load address of error message
+        ecall                      # Print the error message
+        j input_size               # Go back to input prompt
+valid_input:
 	# Display prompt: "Enter list of students"
 	li	a7, 4
 	la	a0, message2
+	ecall
+	
+	# New line
+	li	a7, 11
+	li	a0, 10
 	ecall
 
 	# Initialize array pointers and index
@@ -124,6 +141,11 @@ print:
 	# Display prompt: "Student list: "
 	li	a7, 4
 	la	a0, message3
+	ecall
+	
+	# New line
+	li	a7, 11
+	li	a0, 10
 	ecall
 
 print_loop:
