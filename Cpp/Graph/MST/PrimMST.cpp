@@ -8,7 +8,7 @@ vector<pair<int, edge>> MST;
 int V, E, weight = 0;
 
 void Prim(){
-    priority_queue<edge, vector<edge>, greater<edge>> pq;
+    priority_queue<edge, vector<edge>, greater<edge>> pq; //Min-heap, compare by weight
     vector<bool> selected(V + 1, false);
     vector<int> key(V + 1, INT_MAX);
     vector<int> parent(V + 1, -1);
@@ -21,17 +21,20 @@ void Prim(){
         int v = pq.top().second;
         int vWeight = pq.top().first;
         pq.pop();
+        //if the vertex already in T, skip
         if(selected[v]) continue;
+        //else
         selected[v] = true;
         weight += vWeight;
         if(parent[v] != -1) MST.push_back({parent[v], {vWeight, v}});
+        //Find the safe edge among the edges connecting T to other vertices
         for(auto u : graph[v]){
-            int neibour = u.second;
-            int neibourWeight = u.first;
-            if(!selected[neibour] && neibourWeight < key[neibour]){
-                key[neibour] = neibourWeight;
-                pq.push({neibourWeight, neibour});
-                parent[neibour] = v;
+            int neighbour = u.second;
+            int neighbourWeight = u.first;
+            if(!selected[neighbour] && neighbourWeight < key[neighbour]){
+                key[neighbour] = neighbourWeight;
+                pq.push({neighbourWeight, neighbour});
+                parent[neighbour] = v;
             }
         }
     }
