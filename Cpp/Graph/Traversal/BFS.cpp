@@ -3,23 +3,20 @@
 using namespace std;
 
 int V, E;
-vector<vector<int>> graph;
 
-void BFS(int s){
+void BFS(vector<vector<int>>& graph, int source){
     queue<int> q;
     vector<bool> visited(V, false);
-
-    visited[s] = true;
-    q.push(s);
-
+    //Push source into the queue
+    q.push(source);
+    visited[source] = true;
     while(!q.empty()){
-        int u = q.front();
-        cout << u << " ";
-        q.pop();
-        for(auto i : graph[u]){
-            if(!visited[i]){
-                visited[i] = true;
-                q.push(i);
+        int node = q.front();
+        cout << node << " ";
+        for(int neighbour : graph[node]){
+            if(!visited[neighbour]){
+                q.push(neighbour);
+                visited[neighbour] = true;
             }
         }
     }
@@ -27,14 +24,16 @@ void BFS(int s){
 
 int main(){
     cin >> V >> E;
-    graph.resize(V);
+    //Adjacency list, directed graph
+    vector<vector<int>> graph(V);
+    //Create graph
     for(int i = 0; i < E; i++){
-        int x, y;
-        cin >> x >> y;
-        graph[x].push_back(y);
+        int initial, terminal;
+        cin >> initial >> terminal;
+        graph[initial].push_back(terminal);
     }
-    int s;
-    cin >> s;
-    BFS(s);
+    int source;
+    cin >> source;
+    BFS(graph, source);
     return 0;
 }
