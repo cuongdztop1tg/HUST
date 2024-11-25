@@ -4,9 +4,10 @@ using namespace std;
 
 const int N = 1000;
 int V, E, MSTweight = 0;
-vector<pair<int, pair<int, int>>> graph, MST;
-vector<int> parent, sz;
+vector<pair<int, pair<int, int>>> graph, MST;   //{u, {v, weight}}
 
+//Union Find
+vector<int> parent, sz;
 void makeSet(){
     parent.resize(V + 1);
     sz.resize(V + 1);
@@ -32,25 +33,30 @@ bool Union(int u, int v){
     parent[v] = u;
     return true;
 }
-
+//custom comp function for sorting
+//compare the weight
 bool comp(const pair<int, pair<int, int>> &a, const pair<int, pair<int, int>> &b){
     return a.second.second < b.second.second;
 }
 
 void Kruskal(){
     makeSet();
-    sort(graph.begin(), graph.end(), comp);
-    for(auto i : graph){
-        int rootU = Find(i.first);
-        int rootV = Find(i.second.first);
+    sort(graph.begin(), graph.end(), comp); //sort edges in ascending order by their weights
+    //Iterate through all the edges
+    for(auto edge : graph){
+        //check if the 2 vertices belongs to the same set
+        //If true, adding the edge creates a cycle
+        int rootU = Find(edge.first);
+        int rootV = Find(edge.second.first);
+        //Else, add the edge to T
         if(rootU != rootV){
-            MST.push_back(i);
-            MSTweight += i.second.second;
+            MST.push_back(edge);
+            MSTweight += edge.second.second;
             Union(rootU, rootV);
             if(MST.size() == V - 1){
                 cout << "MST weight: " << MSTweight << endl;
-                for(auto i : MST){
-                    cout << i.first << " " << i.second.first << " " << i.second.second << endl;
+                for(auto edge : MST){
+                    cout << edge.first << " " << edge.second.first << " " << edge.second.second << endl;
                 }
                 return;
             }
