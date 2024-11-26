@@ -29,7 +29,7 @@ void FloydWarshall(){
             for(int j = 1; j <= V; j++){
                 if(D[i][j] > D[i][k] + D[k][j]){
                     D[i][j] = D[i][k] + D[k][j];
-                    P[i][j] = k;
+                    P[i][j] = P[k][j];
                 }
             }
         }
