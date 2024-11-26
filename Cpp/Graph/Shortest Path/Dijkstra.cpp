@@ -6,7 +6,7 @@ typedef pair<int, int> edge;
 map<edge, int> graph;
 int V, E;
 int d[1000], p[1000];
-vector<int> S;
+unordered_set<int> S;
 priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> T;
 
 void relax(int u, int v) {
@@ -28,11 +28,12 @@ void Dijkstra(int s) {
     while (!T.empty()) {
         int u = T.top().second;
         T.pop();
-        if (find(S.begin(), S.end(), u) != S.end()) continue;
-        S.push_back(u);
+        if (S.find(u) != S.end()) continue;
+        S.insert(u);
         for (auto i : graph) {
             if (i.first.first == u) {
-                relax(i.first.first, i.first.second);
+                int v = i.first.second;
+                relax(u, v);
             }
         }
     }
