@@ -33,7 +33,8 @@ void FloydWarshall(){
                 }
             }
         }
-        print(k);
+        //Print D and P
+        //print(k);
     }
 }
 
@@ -54,7 +55,30 @@ int main(){
     for(int i = 1; i <= V; i++){
         D[i][i] = 0;
     }
-    print(0);
+    //print(0);
     FloydWarshall();
+    int source, destination;
+    cin >> source >> destination;
+    int tracking = destination;
+    vector<int> path;
+    bool pathFound = true;
+    while(1){
+        if(P[source][tracking] == -1){ 
+            pathFound = false;
+            break;
+        }
+        path.push_back(tracking);
+        tracking = P[source][tracking];
+        if(P[source][tracking] == source){
+            path.push_back(tracking);
+            path.push_back(source);
+            break;
+        }
+    }
+    if(pathFound){
+        for(int i = path.size() - 1; i >= 0; i--) cout << path[i] << " ";
+        cout << endl;
+        cout << "Path length: " << D[source][destination];
+    }
     return 0;
 }
