@@ -27,7 +27,7 @@ void Prim(){
         selected[v] = true;
         weight += vWeight;
         if(parent[v] != -1) MST.push_back({parent[v], {vWeight, v}});
-        //Find the safe edge among the edges connecting T to other vertices
+        //Find the safe edge among the edges connecting T to other vertices 
         for(auto u : graph[v]){
             int neighbour = u.second;
             int neighbourWeight = u.first;
