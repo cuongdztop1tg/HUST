@@ -26,11 +26,16 @@ bool BellmanFord(int s){
     initSingleSource(s);
     for(int i = 1; i < V; i++){
         for(auto e : graph){
-            relax(e.first.first, e.first.second);
+            int u = e.first.first;
+            int v = e.first.second;
+            relax(u, v);
         }
     }
     for(auto e : graph){
-        if(d[e.first.second] > d[e.first.first] + e.second) return false;
+        int u = e.first.first;
+        int v = e.first.second;
+        int w = e.second;
+        if(d[v] > d[u] + w) return false; //the graph contains a negative cycle
     }
     return true;
 }
