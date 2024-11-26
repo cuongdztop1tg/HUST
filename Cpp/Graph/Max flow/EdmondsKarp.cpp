@@ -1,7 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <cstring>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -53,10 +50,16 @@ void input() {
     cin.tie(NULL);
     cout.tie(NULL);
     cin >> n >> m >> s >> t;
+
+    // Convert to 0-indexed
+    s--; t--;
+
     memset(capG, 0, sizeof(capG));
     for (int i = 0; i < m; i++) {
         int x, y, w;
         cin >> x >> y >> w;
+        // Convert to 0-indexed
+        x--; y--;
         capG[x][y] = w;
     }
     cout << EK(s, t) << endl;
@@ -66,3 +69,17 @@ int main() {
     input();
     return 0;
 }
+
+/* TEST CASE
+6 9 1 6
+1 2 10
+1 3 10
+2 3 2
+2 5 4
+2 4 8
+3 4 9
+4 5 6
+4 6 10
+5 6 10
+-> 19
+*/
