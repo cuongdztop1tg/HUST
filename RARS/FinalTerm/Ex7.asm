@@ -30,6 +30,7 @@ change_colour_C:
 change_colour_E:
 .asciz	"Enter new number colour for letter E: "
 .text
+_main_:
 	#load image to register s0
 	la	s0, image
 	#load command to register
@@ -83,6 +84,7 @@ end_while:
 	#terminate
 	li	s7, 10
 	ecall
+_end_main_:
 
 #------------------------Functions----------------------------
 
@@ -169,4 +171,9 @@ Function_4:
 	add	t3, a0, zero
 	
 Funct_4_end:
+	#recover the contents of t1, t2 and t3
+	lw	t1, 0(sp)
+	lw	t2, 4(sp)
+	lw	t3, 8(sp)
+	addi	sp, sp, 12
 	jr	ra
