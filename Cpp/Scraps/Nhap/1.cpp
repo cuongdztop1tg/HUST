@@ -1,65 +1,59 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
-const int MAXN = 1003;
-vector<pair<int, int>> capG[MAXN];
-int pred[MAXN];
-int V, E, s, t;
+int n, L;
+int cnt = 0;
+vector<pair<int, int>> coordinate;
+int path[100];
 
-bool bfs(int s, int t) {
-    memset(pred, -1, sizeof(pred));
-    queue<int> q;
-    q.push(s);
-    pred[s] = s;
-    while (!q.empty()) {
-        int u = q.front();
-        q.pop();
-        for (auto v : capG[u]) {
-            if (pred[v.first] == -1 && v.second != 0) {
-                pred[v.first] = u;
-                if (v.first == t) return true;
-                q.push(v.first);
-            }
-        }
-    }
-    return false;
+int calDis(int i, int j){
+    return (abs(coordinate[i].first - coordinate[j].first) + abs(coordinate[i].second - coordinate[j].second));
 }
 
-pair<int, int> *findEdge(int u, int v) {
-    for (pair<int, int> &edge : capG[u]) {
-        if (edge.first == v) {
-            return &edge;
+void Try(vector<bool>& visited, int curDis, int k){
+    if(k == n && curDis + calDis(path[n - 1], path[0]) <= L){
+        cnt++;
+        return;
+    }
+    if(curDis > L){
+        return;
+    }
+    for(int i = 0; i < n; i++){
+        if(!visited[i]){
+            visited[i] = true;
+            path[k] = i;
+            Try(visited, curDis + calDis(path[k], path[k - 1]), k + 1);
+            visited[i] = false;
+            path[k] = -1; //not necessary
         }
     }
-    return nullptr;
 }
 
-int Edmond_Karp(int s, int t) {
-    int maxflow = 0;
-    while (bfs(s, t)) {
-        int capP = INT_MAX;
-        for (int v = t; v != s; v = pred[v]) {
-            int u = pred[v];
-            capP = min(capP, findEdge(u, v)->second);
-        }
-        for (int v = t; v != s; v = pred[v]) {
-            int u = pred[v];
-            findEdge(u, v)->second -= capP;
-            findEdge(v, u)->second += capP;
-        }
-        maxflow += capP;
+void input(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    cin >> n;
+    for(int i = 0; i < n; i++){
+        int x, y;
+        cin >> x >> y;
+        coordinate.push_back({x, y});
     }
-    return maxflow;
+    cin >> L;
 }
 
-int main() {
-    cin >> V >> E >> s >> t;
-    for (int i = 0; i < E; i++) {
-        int x, y, w;
-        cin >> x >> y >> w;
-        capG[x].push_back({y, w});
-        capG[y].push_back({x, 0});
-    }
-    cout << Edmond_Karp(s, t) << endl;
+void solve(){
+    vector<bool> visited(n + 1, false);
+    //start at 0
+    path[0] = 0;
+    visited[0] = true;
+    Try(visited, 0, 1);
+    cout << cnt;
+}
+
+int main(){
+    input();
+    solve();
     return 0;
 }

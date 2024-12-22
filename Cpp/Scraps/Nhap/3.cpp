@@ -2,27 +2,34 @@
 
 using namespace std;
 
-int fibo(int n){
-    if(n <= 1) return n;
-    int i = 0, j = 1;
-    for(int k = 2; k <= n; k++){
-        int temp = j;
-        j = j + i;
-        i = temp;
+int n;
+vector<bool> visited;
+int res[100];
+int cnt = 0;
+
+void Try(int k){
+    if(k == n + 1){
+        cnt++;
+        return;
     }
-    return i;
+    if()
+    for(int i = 1; i <= n; i++){
+        if(!visited[i] && (k == 1 || (res[k - 1] + 1 != i && res[k - 1] - 1 != i))){
+            res[k] = i;
+            visited[i] = true;
+            Try(k + 1);
+            visited[i] = false;
+        }
+    }
 }
 
 int main(){
     ios_base::sync_with_stdio(0);
     cin.tie(NULL);
     cout.tie(NULL);
-    int t;
-    cin >> t;
-    while(t--){
-        int n;
-        cin >> n;
-        cout << fibo(n) << endl;
-    }
+    cin >> n;
+    visited.resize(n + 1, false);
+    Try(1);
+    cout << cnt;
     return 0;
 }
