@@ -92,7 +92,8 @@ _end_main_:
 Function_1:
 	li	a7, 4
 	la	a0, image
-	ecall 
+	ecall
+Function_1_end: 
 	jr 	ra
 	
 #Function 2: Print original image without colour number
@@ -109,6 +110,7 @@ Funct2_loop:
 	lb	t0, 0(s0)
 	#check loop condition
 	beq	t0, zero, Funct2_loop_end
+	#if t0 is not a number -> print
 	blt	t0, t1, print_non_numeric
 	bgt	t0, t2, print_non_numeric
 	#if t0 is a number, print a space instead
@@ -129,6 +131,7 @@ Funct2_loop_end:
 	lw	t1, 4(sp)
 	lw	t2, 0(sp)
 	addi	sp, sp, 8
+Function_2_end:
 	jr	ra
 
 #Function 3: print ECD
@@ -143,37 +146,94 @@ Function_4:
 	sw	t2, 4(sp)
 	sw	t3, 8(sp)
 	
+	#store the old colour of D, C and E in a1, a2, a3 respectively
+	li	a1, '2'
+	li	a2, '1'
+	li	a3, '3'
+	
 	#prompt new colour number for letter D
 	li	a7, 4
 	la	a0, change_colour_D
 	ecall
-	li	a7, 5
+	#input new colour for D
+	li	a7, 12
 	ecall
 	#the new colour for D is store in a0 -> store it in t1
 	add	t1, a0, zero
+	#new line
+	li	a7, 11
+	li	a0, 10
+	ecall
 	
 	#prompt new colour number for letter C
 	li	a7, 4
 	la	a0, change_colour_C
 	ecall
-	li	a7, 5
+	#input new colour for C
+	li	a7, 12
 	ecall
 	#the new colour for C is store in a0 -> store it in t2
 	add	t2, a0, zero
+	#new line
+	li	a7, 11
+	li	a0, 10
+	ecall
 	
 	#prompt new colour number for letter E
 	li	a7, 4
 	la	a0, change_colour_E
 	ecall
-	li	a7, 5
+	#input new colour for E
+	li	a7, 12
 	ecall
 	#the new colour for E is store in a0 -> store it in t3
 	add	t3, a0, zero
+	#new line
+	li	a7, 11
+	li	a0, 10
+	ecall
 	
-Funct_4_end:
+	la	s0, image	#store image in s0
+Funct4_loop:
+	#store the character of s0 to t0
+	lb	t0, 0(s0)
+	#check loop condition
+	beq	t0, zero, Funct4_loop_end
+	#if t0 is the colour of D -> print the new colour in t1
+	beq	t0, a1, print_new_colour_D
+	#if t0 is the colour of C -> print the new colour in t2
+	beq	t0, a2, print_new_colour_C
+	#if t0 is the colour of E -> print the new colour in t3
+	beq	t0, a3, print_new_colour_E
+	#else, print the character
+	li	a7, 11
+	add	a0, t0, zero
+	ecall
+	j	Funct4_continue
+print_new_colour_D:
+	li	a7, 11
+	add	a0, t1, zero
+	ecall
+	j	Funct4_continue
+print_new_colour_C:
+	li	a7, 11
+	add	a0, t2, zero
+	ecall
+	j	Funct4_continue
+print_new_colour_E:
+	li	a7, 11
+	add	a0, t3, zero
+	ecall
+	j	Funct4_continue
+Funct4_continue:
+	#continue to the next character
+	addi	s0, s0, 1
+	j	Funct4_loop
+Funct4_loop_end:
 	#recover the contents of t1, t2 and t3
 	lw	t1, 0(sp)
 	lw	t2, 4(sp)
 	lw	t3, 8(sp)
 	addi	sp, sp, 12
+Function_4_end:
 	jr	ra
