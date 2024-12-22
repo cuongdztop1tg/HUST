@@ -1,24 +1,24 @@
 .data
 image:
-.ascii	"                                           *************       \n"
-.ascii	"**************                            *3333333333333*      \n"
-.ascii	"*222222222222222*                         *33333********       \n" 
-.ascii	"*22222******222222*                       *33333*              \n"
-.ascii	"*22222*      *22222*                      *33333********       \n"
-.ascii	"*22222*       *22222*      *************  *3333333333333*      \n"
-.ascii	"*22222*       *22222*    **11111*****111* *33333********       \n"
-.ascii	"*22222*       *22222*  **1111**       **  *33333*              \n"
-.ascii	"*22222*      *222222*  *1111*             *33333********       \n"
-.ascii	"*22222*******222222*  *11111*             *3333333333333*      \n"
-.ascii	"*2222222222222222*    *11111*              *************       \n"
-.ascii	"***************       *11111*                                  \n"
-.ascii	"      ---              *1111**                                 \n"
-.ascii	"    / o o \             *1111****   *****                      \n"
-.ascii	"    \  >  /              **111111***111*                       \n"
-.asciz	"     -----                 ***********    dce.hust.edu.vn      \n"
+.ascii	"                                           ************* \n"
+.ascii	"**************                            *3333333333333*\n"
+.ascii	"*222222222222222*                         *33333******** \n" 
+.ascii	"*22222******222222*                       *33333*        \n"
+.ascii	"*22222*      *22222*                      *33333******** \n"
+.ascii	"*22222*       *22222*      *************  *3333333333333*\n"
+.ascii	"*22222*       *22222*    **11111*****111* *33333******** \n"
+.ascii	"*22222*       *22222*  **1111**       **  *33333*        \n"
+.ascii	"*22222*      *222222*  *1111*             *33333******** \n"
+.ascii	"*22222*******222222*  *11111*             *3333333333333*\n"
+.ascii	"*2222222222222222*    *11111*              ************* \n"
+.ascii	"***************       *11111*                            \n"
+.ascii	"      ---              *1111**                           \n"
+.ascii	"    / o o \             *1111****   *****                \n"
+.ascii	"    \  >  /              **111111***111*                 \n"
+.asciz	"     -----                 ***********    dce.hust.edu.vn\n"
 image_end:
 command:
-.asciz	"1: Print the image\n2: Print the origina image without colour number\n3: Swap order into ECD\n4: Change colour number\n5: Exit\nEnter command: " 
+.asciz	"1: Print the image\n2: Print the original image without colour number\n3: Swap order into ECD\n4: Change colour number\n5: Exit\nEnter command: " 
 next_command:
 .asciz	"Enter next command: "
 input_handling:
@@ -29,6 +29,7 @@ change_colour_C:
 .asciz	"Enter new number colour for letter C: "
 change_colour_E:
 .asciz	"Enter new number colour for letter E: "
+
 .text
 _main_:
 	#load image to register s0
@@ -59,19 +60,23 @@ while:
 	li	a7, 4
 	ecall
 	j 	while
-#Case 1: print the original image
+#Case 1: Print the original image
 case_1:	
 	jal	Function_1
 	j	continue
+#Case 2: Print the original image without colour number
 case_2:
 	jal	Function_2
 	j	continue
+#Case 3: ECD
 case_3:
 	jal	Function_3
 	j	continue
+#Case 4: Change number colour and print
 case_4:
 	jal	Function_4
 	j	continue
+#Case 5: Exit
 case_5:
 	j	end_while
 continue:
@@ -136,6 +141,9 @@ Function_2_end:
 
 #Function 3: print ECD
 Function_3:
+	
+Function_3_end:
+	jr	ra
 	
 #Function 4: Enter new colour for each letter and print
 Function_4:
