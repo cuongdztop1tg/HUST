@@ -21,7 +21,12 @@ image:
 .asciz	"     -----           \0     ***********   \0dce.hust.edu.vn\n"
 image_end:
 command:
-.asciz	"1: Print the image\n2: Print the original image without colour number\n3: Swap order into ECD\n4: Change colour number\n5: Exit\nEnter command: " 
+.ascii	"1: Print the image\n"
+.ascii	"2: Print the original image without colour number\n"
+.ascii	"3: Swap order into ECD\n"
+.ascii	"4: Change colour number\n"
+.ascii	"5: Exit\n"
+.asciz	"Enter command: " 
 next_command:
 .asciz	"Enter next command: "
 command_input_handling:
@@ -36,6 +41,14 @@ new_colour_input_handling:
 .asciz	"The colour must be a NUMBER from 0-9. Please enter again!"
 
 .text
+#-------------------WORKFLOW-------------------
+# The main function is a while loop, allowing the user to enter command (interger from 1 to 4) multiple times
+# Each command will be correspond to a Function:
+# - Function 1: Print the original image
+# - Function 2: Print the original image withour the colour number
+# - Function 3: Print ECD instead of DCE
+# - Function 4: Enter new color number for each letter and print the new image
+# The command 5 will terminate the program
 _main_:
 	#load command to register
 	li 	t1, 1
@@ -96,7 +109,9 @@ _end_main_:
 
 #------------------------Functions----------------------------
 
-#Function 1: Print the original image
+#-------------------Function 1: Print the original image-------------------
+# Iterate through each character of the image and print it
+# If the character is a NULL terminator, print a space instead
 Function_1:
 	la 	s0, image          # Load address of the image
     	la 	s1, image_end      # Load end of the image
@@ -130,7 +145,10 @@ Funct1_end_print:
 Function_1_end: 
 	jr 	ra
 	
-#Function 2: Print original image without colour number
+#-------------------Function 2: Print original image without colour number-------------------
+# Iterate throught each chracter of the image
+# If the chracter is not a number, print it
+# Else, print a space instead
 Function_2:
 	#store the content of t1 and t2 in stack
 	addi	sp, sp, -8
@@ -186,7 +204,10 @@ Function_2_end:
 	addi	sp, sp, 8
 	jr	ra
 
-#Function 3: Print ECD
+#-------------------Function 3: Print ECD-------------------
+# Iterate through each line
+# Start printing from the E section, then C and finally D
+# We will switch to another section if we meet '\n' or '\0'
 Function_3:
 	la      s0, image        # Load address of the image start into s0
     	addi    s1, s0, 928    	 # s1 is the boundary for s0
@@ -258,10 +279,14 @@ Function_3_end:
     	addi	sp, sp, 8
 	jr	ra
 	
-#Function 4: Enter new colour for each letter and print
+#-------------------Function 4: Enter new colour for each letter and print-------------------
+# Allow the user to enter new colour number for each letter and store it in t1, t2 and t2 register
+# Iterdate through each character of the image
+# If the character is not a number, print it
+# Else, print the new colour number corresponding to the letter 
 Function_4:
 	# Use t1, t2, t3 to store the new colour number
-	# Store the contents of t1, t2, t3 in stack
+	# Store the contents of t1, t2, t3, t4, t5 in stack
 	addi	sp, sp, -20
 	sw	t1, 0(sp)
 	sw	t2, 4(sp)
