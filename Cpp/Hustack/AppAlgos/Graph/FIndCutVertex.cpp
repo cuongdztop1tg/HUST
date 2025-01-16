@@ -28,6 +28,7 @@ void DFS(int u){
                 Bridges.push_back({u, v});
             }
         }
+        //v is ancestor of u -> (u, v) is a back-edge
         else if(parent[u] != v){
             low[u] = min(low[u], num[v]);
         }
