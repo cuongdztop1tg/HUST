@@ -2,58 +2,24 @@
 
 using namespace std;
 
-int n, L;
-int cnt = 0;
-vector<pair<int, int>> coordinate;
-int path[100];
+int res = 0;
+int bin[7];
 
-int calDis(int i, int j){
-    return (abs(coordinate[i].first - coordinate[j].first) + abs(coordinate[i].second - coordinate[j].second));
-}
-
-void Try(vector<bool>& visited, int curDis, int k){
-    if(k == n && curDis + calDis(path[n - 1], path[0]) <= L){
-        cnt++;
+void Try(int k, int n){
+    if(k == n){
+        res++;
         return;
     }
-    if(curDis > L){
-        return;
+    for(int i = 0; i <= 1; i++){
+        if(k >= 2 && bin[k - 1] == 0 && bin[k - 2] == 0 && i == 0) continue;
+        bin[k] = i;
+        Try(k + 1, n);
+        bin[k] = -1;
     }
-    for(int i = 0; i < n; i++){
-        if(!visited[i]){
-            visited[i] = true;
-            path[k] = i;
-            Try(visited, curDis + calDis(path[k], path[k - 1]), k + 1);
-            visited[i] = false;
-            path[k] = -1; //not necessary
-        }
-    }
-}
-
-void input(){
-    ios_base::sync_with_stdio(0);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    cin >> n;
-    for(int i = 0; i < n; i++){
-        int x, y;
-        cin >> x >> y;
-        coordinate.push_back({x, y});
-    }
-    cin >> L;
-}
-
-void solve(){
-    vector<bool> visited(n + 1, false);
-    //start at 0
-    path[0] = 0;
-    visited[0] = true;
-    Try(visited, 0, 1);
-    cout << cnt;
 }
 
 int main(){
-    input();
-    solve();
+    Try(0, 6);
+    cout << res;
     return 0;
 }

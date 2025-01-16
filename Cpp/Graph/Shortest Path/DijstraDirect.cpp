@@ -31,6 +31,9 @@ void Dickstra(){
                 }
             }
         }
+        for(int k = 1; k <= V; k++) cout << d[k] << " ";
+        cout << "Choose: " << u;
+        cout << endl;
     }
 }
 
