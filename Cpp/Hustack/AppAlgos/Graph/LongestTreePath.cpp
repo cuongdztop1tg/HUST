@@ -4,7 +4,7 @@ using namespace std;
 
 int V;
 vector<int> dist;
-vector<vector<pair<int, int>>> graph;
+vector<vector<pair<int, int>>> graph;   //{v, w}
 
 void init(){
     for(int i = 0; i <= V; i++){

@@ -26,7 +26,7 @@ bool BFS(int s, int t){
     return false;
 }
 
-int EK(int s, int t){
+int maxFlow(int s, int t){
     int maxFlow = 0;
     while(BFS(s, t)){
         int capP = INT_MAX;
@@ -43,6 +43,31 @@ int EK(int s, int t){
     }
     return maxFlow;
 }
+
+void minCut(int s, int t){
+    vector<bool> visited(V + 1, false);
+    queue<int> q;
+    q.push(s);
+    visited[s] = true;
+    while(!q.empty()){
+        int u = q.front();
+        q.pop();
+        for(int v = 1; v <= V; v++){
+            if(!visited[v] && capRG[u][v] > 0){
+                visited[v] = true;
+                q.push(v);
+            }
+        }
+    }
+    cout << "Min-cut edges: " << endl;
+    for(int u = 1; u <= V; u++){
+        for(int v = 1; v <= V; v++){
+            if(visited[u] && !visited[v] && capG[u][v] > 0){
+                cout << u << " -> " << v << endl;
+            }
+        }
+    }
+}
 int main(){
     int s, t;
     cin >> V >> E >> s >> t;
@@ -55,7 +80,8 @@ int main(){
         capG[u][v] = w;
         capRG[u][v] = w;
     }
-    cout << EK(s, t);
+    cout << maxFlow(s, t) << endl;
+    minCut(s, t);
     return 0;
 }
 
